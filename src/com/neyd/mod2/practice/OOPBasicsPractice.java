@@ -31,6 +31,7 @@ public class OOPBasicsPractice {
         System.out.println("Зарас проходить " + day + " день");
         while (true) {
             System.out.println();
+            System.out.println("У Вас грошей - " + money + " грн, і - " + allResource + " ресурсів");
             System.out.println("1.Погодувати всіх тварин");
             System.out.println("2.Подивитися скільки ресурсів");
             System.out.println("3.Продати ресурси");

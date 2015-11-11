@@ -16,9 +16,11 @@ abstract public class Animal {
         this.priceAnimal = priceAnimal;
         this.name = name;
     }
-    public int getFood(){
+
+    public int getFood() {
         return resource;
     }
+
     public int isLive() {
         return asLive;
     }

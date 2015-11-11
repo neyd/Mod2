@@ -5,21 +5,23 @@ package com.neyd.mod2.practice;
  */
 public class Goat extends Animal {
     public Goat(int age, int priceAnimal, String name) {
-        super(age,priceAnimal,name);
+        super(age, priceAnimal, name);
     }
 
     @Override
     public int getPriceFood() {
-        if(asLive == 1) {
+        if (asLive == 1) {
             return 4 * this.age;
         } else return 0;
     }
+
     @Override
     public int getResource() {
-        if(asLive == 1) {
+        if (asLive == 1) {
             return 6 * this.age;
         } else return 0;
     }
+
     public int getPriceAnimal() {
         if (asLive == 1) {
             if (this.age <= 43) {
@@ -33,11 +35,11 @@ public class Goat extends Animal {
             } else return 0;
         } else return 0;
     }
-    public int isLive(){
+
+    public int isLive() {
         int randomNumber = (int) (Math.random() * (11)) + 80;
-        if ( this.age <= 85) {
-           return asLive = 1;
-        }
-        else return asLive = 0;
+        if (this.age <= 85) {
+            return asLive = 1;
+        } else return asLive = 0;
     }
 }

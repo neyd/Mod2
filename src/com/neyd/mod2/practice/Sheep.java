@@ -5,7 +5,7 @@ package com.neyd.mod2.practice;
  */
 public class Sheep extends Animal {
     public Sheep(int age, int priceAnimal, String name) {
-        super(age,priceAnimal,name);
+        super(age, priceAnimal, name);
     }
 
     @Override
@@ -14,6 +14,7 @@ public class Sheep extends Animal {
             return 2 * this.age;
         } else return 0;
     }
+
     public int getPriceAnimal() {
         if (asLive == 1) {
             if (this.age <= 30) {
@@ -27,6 +28,7 @@ public class Sheep extends Animal {
             } else return 0;
         } else return 0;
     }
+
     public int isLive() {
         int randomNumber = (int) (Math.random() * (11)) + 55;
         if (this.age <= 60) {
