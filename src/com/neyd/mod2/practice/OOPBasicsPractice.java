@@ -15,7 +15,8 @@ public class OOPBasicsPractice {
         int thisday = 1;
         int daysee = 0;
         int day = 1;
-        Animal[] animals = new Animal[7];
+        int number = 7;
+        Animal[] animals = new Animal[number];
         animals[0] = new Cow(25, 200, "Корова");
         animals[1] = new Horse(10, 150, "Кінь");
         animals[2] = new Goat(4, 100, "Коза");
@@ -38,8 +39,9 @@ public class OOPBasicsPractice {
             System.out.println("4.Подивитися скільки грошей");
             System.out.println("5.Продати тварину");
             System.out.println("6.Пустити на їжу");
-            System.out.println("7.Наступний день");
-            System.out.println("8.Закінчити");
+            System.out.println("7.Купити тварин");
+            System.out.println("8.Наступний день");
+            System.out.println("9.Закінчити");
             resp = Integer.parseInt(scanner.nextLine());
             if (resp == 1) {
                 for (int i = 0; i < animals.length; i++) {
@@ -136,8 +138,23 @@ public class OOPBasicsPractice {
                     thisday = 0;
                 }
             } else if (resp == 7) {
+                for (int i = 0; i < animals.length; i++) {
+                    System.out.println((i + 1) + "." + animals[i].name);
+                }
+                resp = Integer.parseInt(scanner.nextLine());
+                if (resp == 1){
+                    System.out.println("Введіть скільки місяців корові" + number);
+                    int agecow = Integer.parseInt(scanner.nextLine());
+                    number++;
+                    animals[number-1] = new Cow(agecow,200,"Корова");
+
+                }
 
             } else if (resp == 8) {
+                day = day + 1;
+                System.out.println("Зараз " + day + " день");
+            }
+            else if (resp == 9){
                 break;
             }
         }

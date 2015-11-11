@@ -7,18 +7,19 @@ public class Goat extends Animal {
     public Goat(int age, int priceAnimal, String name) {
         super(age, priceAnimal, name);
     }
-
+    public static final int FEEDING_COST_PER_MOUNTH_OF_AGE = 4;
+    public static final int PRODUCES_RESOURCES_COST_PER_MOUNTH_OF_AGE = 6;
     @Override
     public int getPriceFood() {
         if (asLive == 1) {
-            return 4 * this.age;
+            return FEEDING_COST_PER_MOUNTH_OF_AGE * this.age;
         } else return 0;
     }
 
     @Override
     public int getResource() {
         if (asLive == 1) {
-            return 6 * this.age;
+            return PRODUCES_RESOURCES_COST_PER_MOUNTH_OF_AGE * this.age;
         } else return 0;
     }
 
