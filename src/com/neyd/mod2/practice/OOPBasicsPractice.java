@@ -11,10 +11,11 @@ public class OOPBasicsPractice {
         int allResource = 0;
         int resp;
         int money = 20000;
+        int mounth = 1;
+        int day = 1;
         boolean thisday = true;
         boolean daysee = false;
-        int day = 1;
-        int mounth = 1;
+        String asHungryString = "Тварини голодні";
         Animal[] animals = new Animal[50];
         animals[0] = new Cow(20, 200, "Корова");
         animals[1] = new Horse(25, 150, "Кінь");
@@ -32,7 +33,7 @@ public class OOPBasicsPractice {
         while (true) {
             System.out.println();
             System.out.println("У Вас грошей - " + money + " грн, і - " + allResource + " ресурсів");
-            System.out.println("1.Погодувати всіх тварин");
+            System.out.println("1.Погодувати всіх тварин        " + asHungryString);
             System.out.println("2.Подивитися скільки ресурсів");
             System.out.println("3.Продати ресурси");
             System.out.println("4.Подивитися скільки грошей");
@@ -51,7 +52,7 @@ public class OOPBasicsPractice {
                         System.out.println("Ціна їжі - " + animals[i].getPriceFood());
                         money = money - animals[i].getPriceFood();
                         System.out.println(animals[0].getPopulation());
-
+                        asHungryString = "";
                     }
                 }
                 System.out.println("Тварини тепер ситі");
@@ -341,16 +342,18 @@ public class OOPBasicsPractice {
                 thisday = true;
                 daysee = false;
                 System.out.println("Гроші: " + money + " грн");
+                System.out.println("У вас є такі тварини ");
+                asHungryString = "Тварини голодні";
                 for (int i = 0; i < animals[0].getPopulation(); i++) {
-                    System.out.println("У вас є такі тварини " + animals[i].getAge());
-                    System.out.println(animals[i].name + " - " + animals[i].isLive());
+                    System.out.println(animals[i].name + " - " + animals[i].asLive + " - " + animals[i].getAge());
                     animals[i].setHungry(true);
-                    if (day%10 == 0){
-                        for (int j = 0; j < animals[0].population ; j++) {
-                            animals[j].setAge(animals[j].getAge()+1);
-                            mounth++;
-                        }
+                }
+                if (day%5 == 0){
+                    for (int j = 0; j < animals[0].population ; j++) {
+                        animals[j].setAge(animals[j].getAge()+1);
+                        mounth++;
                     }
+                    day = 0;
                 }
             }
             else if (resp == 9){
