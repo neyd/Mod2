@@ -11,20 +11,20 @@ public class Goat extends Animal {
     public static final int PRODUCES_RESOURCES_COST_PER_MOUNTH_OF_AGE = 6;
     @Override
     public int getPriceFood() {
-        if (asLive == 1) {
+        if (asLive != false) {
             return FEEDING_COST_PER_MOUNTH_OF_AGE * this.age;
         } else return 0;
     }
 
     @Override
     public int getResource() {
-        if (asLive == 1) {
+        if (asLive != false) {
             return PRODUCES_RESOURCES_COST_PER_MOUNTH_OF_AGE * this.age;
         } else return 0;
     }
 
     public int getPriceAnimal() {
-        if (asLive == 1) {
+        if (asLive != false) {
             if (this.age <= 43) {
                 return priceAnimal * 2;
             } else if (this.age <= 58) {
@@ -37,10 +37,10 @@ public class Goat extends Animal {
         } else return 0;
     }
 
-    public int isLive() {
+    public boolean isLive() {
         int randomNumber = (int) (Math.random() * (11)) + 80;
         if (this.age <= 85) {
-            return asLive = 1;
-        } else return asLive = 0;
+            return asLive = true;
+        } else return asLive = false;
     }
 }

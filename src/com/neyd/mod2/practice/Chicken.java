@@ -11,25 +11,25 @@ public class Chicken extends Animal {
     public static final int PROVIDES_RESOURCES_WHEN_THROWING_FOOD = 5;
     @Override
     public int getPriceFood() {
-        if (asLive == 1) {
+        if (asLive != false) {
             return this.age;
         } else return 0;
     }
 
     public int getResource() {
-        if (asLive == 1) {
+        if (asLive != false) {
             return PRODUCES_RESOURCES_COST_PER_MOUNTH_OF_AGE * this.age;
         } else return 0;
     }
 
     public int getFood() {
-        if (asLive == 1) {
+        if (asLive != false) {
             return PROVIDES_RESOURCES_WHEN_THROWING_FOOD * this.age;
         } else return 0;
     }
 
     public int getPriceAnimal() {
-        if (asLive == 1) {
+        if (asLive != false) {
             if (this.age <= 8) {
                 return priceAnimal * 2;
             } else if (this.age <= 10) {
@@ -42,10 +42,10 @@ public class Chicken extends Animal {
         } else return 0;
     }
 
-    public int isLive() {
+    public boolean isLive() {
         int randomNumber = (int) (Math.random() * (11)) + 10;
         if (this.age <= 15) {
-            return asLive = 1;
-        } else return asLive = 0;
+            return asLive = true;
+        } else return asLive = false;
     }
 }

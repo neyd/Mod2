@@ -5,27 +5,34 @@ package com.neyd.mod2.practice;
  */
 abstract public class Animal {
     private boolean asHungry;
-    protected int asLive;
+    protected boolean asLive;
     protected int age;
     protected int resource;
     protected int priceAnimal;
     protected String name;
+    int population = 7;
 
     public Animal(int age, int priceAnimal, String name) {
         this.age = age;
         this.priceAnimal = priceAnimal;
         this.name = name;
     }
+    public int getPopulation() {
+        return population;
+    }
 
+    public void setPopulation(int population) {
+        this.population = population;
+    }
     public int getFood() {
         return resource;
     }
 
-    public int isLive() {
+    public boolean isLive() {
         return asLive;
     }
 
-    public void setAsLive(int asLive) {
+    public void setAsLive(boolean asLive) {
         this.asLive = asLive;
     }
 

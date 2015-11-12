@@ -12,26 +12,26 @@ public class Cow extends Animal {
         public static final int PROVIDES_RESOURCES_WHEN_THROWING_FOOD = 25;
     @Override
     public int getPriceFood() {
-        if (asLive == 1) {
+        if (asLive != false) {
             return FEEDING_COST_PER_MOUNTH_OF_AGE * this.age;
         } else return 0;
     }
 
     @Override
     public int getResource() {
-        if (asLive == 1) {
+        if (asLive != false) {
             return PRODUCES_RESOURCES_COST_PER_MOUNTH_OF_AGE * this.age;
         } else return 0;
     }
 
     public int getFood() {
-        if (asLive == 1) {
+        if (asLive != false) {
             return PROVIDES_RESOURCES_WHEN_THROWING_FOOD * this.age;
         } else return 0;
     }
 
     public int getPriceAnimal() {
-        if (asLive == 1) {
+        if (asLive != false) {
             if (this.age <= 60) {
                 return priceAnimal * 2;
             } else if (this.age <= 80) {
@@ -44,13 +44,13 @@ public class Cow extends Animal {
         } else return 0;
     }
 
-    public int isLive() {
+    public boolean isLive() {
         int randomNumber = (int) (Math.random() * (21)) + 110;
         if (this.age <= 120) {
-            return asLive = 1;
+            return asLive = true;
         } else {
-            asLive = 0;
-            return asLive = 0;
+            asLive = false;
+            return asLive = false;
         }
     }
 }

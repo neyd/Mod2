@@ -1,7 +1,6 @@
 package com.neyd.mod2.practice;
 
 import java.util.Scanner;
-
 /**
  * Created by Женя on 03.11.2015.
  */
@@ -11,23 +10,23 @@ public class OOPBasicsPractice {
         int allPrice = 0;
         int allResource = 0;
         int resp;
-        int money = 1500;
-        int thisday = 1;
-        int daysee = 0;
+        int money = 20000;
+        boolean thisday = true;
+        boolean daysee = false;
         int day = 1;
-        int number = 7;
-        Animal[] animals = new Animal[number];
-        animals[0] = new Cow(25, 200, "Корова");
-        animals[1] = new Horse(10, 150, "Кінь");
-        animals[2] = new Goat(4, 100, "Коза");
-        animals[3] = new Pig(3, 50, "Свиня");
-        animals[4] = new Sheep(4, 50, "Вівця");
-        animals[5] = new Hare(6, 25, "Заєць");
-        animals[6] = new Chicken(2, 15, "Курка");
+        int mounth = 1;
+        Animal[] animals = new Animal[50];
+        animals[0] = new Cow(20, 200, "Корова");
+        animals[1] = new Horse(25, 150, "Кінь");
+        animals[2] = new Goat(35, 100, "Коза");
+        animals[3] = new Pig(33, 50, "Свиня");
+        animals[4] = new Sheep(20, 50, "Вівця");
+        animals[5] = new Hare(3, 25, "Заєць");
+        animals[6] = new Chicken(6, 15, "Курка");
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < animals.length; i++) {
+        for (int i = 0; i < animals[0].getPopulation(); i++) {
             animals[i].isLive();
-            System.out.println(animals[i].isLive() + " - " + animals[i].name);
+            System.out.println(animals[i].isLive() + " - " + animals[i].name + " - " + animals[i].getAge());
         }
         System.out.println("Зарас проходить " + day + " день");
         while (true) {
@@ -44,15 +43,14 @@ public class OOPBasicsPractice {
             System.out.println("9.Закінчити");
             resp = Integer.parseInt(scanner.nextLine());
             if (resp == 1) {
-                for (int i = 0; i < animals.length; i++) {
-                    allPrice = allPrice + animals[i].getPriceFood();
-                }
-                for (int i = 0; i < animals.length; i++) {
-                    if (money >= allPrice) {
+                for (int i = 0; i < animals[0].getPopulation(); i++) {
+                    if (money >= animals[i].getPriceFood()) {
+                        allPrice = allPrice + animals[i].getPriceFood();
                         animals[i].feed();
-                        System.out.println(animals[i].isHungry() + " - " + animals[i].name);
+                        System.out.println(animals[i].isHungry() + " - " + animals[i].name + " - " + animals[i].getAge());
                         System.out.println("Ціна їжі - " + animals[i].getPriceFood());
                         money = money - animals[i].getPriceFood();
+                        System.out.println(animals[0].getPopulation());
 
                     }
                 }
@@ -62,27 +60,27 @@ public class OOPBasicsPractice {
                 allPrice = 0;
                 scanner.nextLine();
             } else if (resp == 2) {
-                if (thisday == 1) {
-                    for (int i = 0; i < animals.length; i++) {
+                if (thisday != false) {
+                    for (int i = 0; i < animals[0].getPopulation(); i++) {
                         System.out.println(animals[i].getResource() + " - " + animals[i].name);
                         allResource = allResource + animals[i].getResource();
-                        thisday = 0;
-                        daysee = 1;
+                        thisday = false;
+                        daysee = true;
                     }
                 } else {
                     System.out.println("Ви вже дивилися ресурси сьогодні");
                 }
-                System.out.println("У вас зарас " + allResource + " Ресурсів");
+                System.out.println("У вас зарас " + allResource + " ресурсів");
                 scanner.nextLine();
             } else if (resp == 3) {
-                if (daysee == 1) {
-                    money = money + (allResource * 4);
+                if (daysee != false) {
+                    money = money + (allResource * 2);
                     allResource = 0;
                     System.out.println();
                     System.out.println("У вас тепер " + money + " грн і  " + allResource + " ресурсів");
                     scanner.nextLine();
-                    thisday = 0;
-                    daysee = 0;
+                    thisday = false;
+                    daysee = false;
                 } else {
                     System.out.println("Ви ще не дивилися скільки ресурсів, або уже продали їх");
                     scanner.nextLine();
@@ -91,68 +89,269 @@ public class OOPBasicsPractice {
                 System.out.println("У вас зарас " + money + " грн");
                 scanner.nextLine();
             } else if (resp == 5) {
-                for (int i = 0; i < animals.length; i++) {
+                for (int i = 0; i < animals[0].getPopulation(); i++) {
                     System.out.println((i + 1) + "." + animals[i].name + " - " + animals[i].asLive);
                 }
                 resp = Integer.parseInt(scanner.nextLine());
-                for (int i = 0; i < animals.length; i++) {
+                for (int i = 0; i < animals[0].getPopulation(); i++) {
                     if (resp == i + 1) {
                         money = money + animals[i].getPriceAnimal();
                         System.out.println("Ви продали цю тварину за " + animals[i].getPriceAnimal() + " і зараз у вас " + money + " ");
-                        animals[i].setAsLive(0);
+                        animals[i].setAsLive(false);
                     }
                 }
             } else if (resp == 6) {
-                System.out.println("1." + animals[0].name + " - " + animals[0].asLive);
-                System.out.println("2." + animals[3].name + " - " + animals[3].asLive);
-                System.out.println("3." + animals[5].name + " - " + animals[5].asLive);
-                System.out.println("4." + animals[6].name + " - " + animals[6].asLive);
+                for (int i = 0; i < animals[0].population; i++) {
+                    if (animals[i].getFood() != 0) {
+                        System.out.println((i + 1) + "." + animals[i].name + " - " + animals[i].asLive);
+                    }
+                }
                 resp = Integer.parseInt(scanner.nextLine());
-                if (resp == 1) {
-                    animals[0].getFood();
-                    allResource = allResource + animals[0].getFood();
-                    System.out.println("Ви отримали " + animals[0].getFood() + " ресурсів");
-                    animals[0].setAsLive(0);
-                    daysee = 1;
-                    thisday = 0;
-                } else if (resp == 2) {
-                    animals[3].getFood();
-                    allResource = allResource + animals[3].getFood();
-                    System.out.println("Ви отримали " + animals[3].getFood() + " ресурсів");
-                    animals[3].setAsLive(0);
-                    daysee = 1;
-                    thisday = 0;
-                } else if (resp == 3) {
-                    animals[5].getFood();
-                    allResource = allResource + animals[5].getFood();
-                    System.out.println("Ви отримали " + animals[5].getFood() + " ресурсів");
-                    animals[5].setAsLive(0);
-                    daysee = 1;
-                    thisday = 0;
-                } else if (resp == 4) {
-                    animals[6].getFood();
-                    allResource = allResource + animals[6].getFood();
-                    System.out.println("Ви отримали " + animals[6].getFood() + " ресурсів");
-                    animals[6].setAsLive(0);
-                    daysee = 1;
-                    thisday = 0;
+                for (int i = 0; i < animals[0].population; i++) {
+                    if (resp == i + 1) {
+                        animals[i].getFood();
+                        allResource = allResource + animals[i].getFood();
+                        System.out.println("Ви отримали " + animals[i].getFood() + " ресурсів");
+                        animals[i].setAsLive(false);
+                        daysee = true;
+                        thisday = false;
+                    }
                 }
             } else if (resp == 7) {
-                for (int i = 0; i < animals.length; i++) {
+                for (int i = 0; i < 7; i++) {
                     System.out.println((i + 1) + "." + animals[i].name);
                 }
                 resp = Integer.parseInt(scanner.nextLine());
-                if (resp == 1){
-                    System.out.println("Введіть скільки місяців корові" + number);
-                    int agecow = Integer.parseInt(scanner.nextLine());
-                    number++;
-                    animals[number-1] = new Cow(agecow,200,"Корова");
-
+                if (resp == 1) {
+                    int mounth1 = (int) (Math.random() * (100));
+                    int mounth2 = (int) (Math.random() * (100));
+                    int mounth3 = (int) (Math.random() * (100));
+                    System.out.println("1." + mounth1 + " місяці. Ціна - " + mounth1 * 50);
+                    System.out.println("2." + mounth2 + " місяці. Ціна - " + mounth2 * 50);
+                    System.out.println("3." + mounth3 + " місяці. Ціна - " + mounth3 * 50);
+                    resp = Integer.parseInt(scanner.nextLine());
+                    if (resp == 1) {
+                        animals[animals[0].getPopulation()] = new Cow(mounth1, mounth1 * 50, "Корова");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth1*50;
+                        animals[0].population++;
+                        System.out.println("ви купили корову якій " + mounth1 + " місяці " + "ціна - " + (mounth1 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 2) {
+                        animals[animals[0].getPopulation()] = new Cow(mounth2, mounth2 * 50, "Корова");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth2*50;
+                        animals[0].population++;
+                        System.out.println("ви купили корову якій " + mounth2 + " місяці " + "ціна - " + (mounth2 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 3) {
+                        animals[animals[0].getPopulation()] = new Cow(mounth3, mounth3 * 50, "Корова");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth3*50;
+                        animals[0].population++;
+                        System.out.println("ви купили корову якій " + mounth3 + " місяці " + "ціна - " + (mounth3 * 50) + "грн");
+                        scanner.nextLine();
+                    }
+                } else if (resp == 2) {
+                    int mounth1 = (int) (Math.random() * (95));
+                    int mounth2 = (int) (Math.random() * (95));
+                    int mounth3 = (int) (Math.random() * (95));
+                    System.out.println("1." + mounth1 + " місяців. Ціна - " + mounth1 * 50);
+                    System.out.println("2." + mounth2 + " місяців. Ціна - " + mounth2 * 50);
+                    System.out.println("3." + mounth3 + " місяців. Ціна - " + mounth3 * 50);
+                    resp = Integer.parseInt(scanner.nextLine());
+                    if (resp == 1) {
+                        animals[animals[0].getPopulation()] = new Horse(mounth1, mounth1 * 50, "Кінь");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth1*50;
+                        animals[0].population++;
+                        System.out.println("ви купили коня якій " + mounth1 + " місяці " + "ціна - " + (mounth1 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 2) {
+                        animals[animals[0].getPopulation()] = new Horse(mounth2, mounth2 * 50, "Кінь");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth2*50;
+                        animals[0].population++;
+                        System.out.println("ви купили коня якій " + mounth2 + " місяці " + "ціна - " + (mounth2 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 3) {
+                        animals[animals[0].getPopulation()] = new Horse(mounth3, mounth3 * 50, "Кінь");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth3*50;
+                        animals[0].population++;
+                        System.out.println("ви купили коня якій " + mounth3 + " місяці " + "ціна - " + (mounth3 * 50) + "грн");
+                        scanner.nextLine();
+                    }
+                } else if (resp == 3){
+                    int mounth1 = (int) (Math.random() * (75));
+                    int mounth2 = (int) (Math.random() * (75));
+                    int mounth3 = (int) (Math.random() * (75));
+                    System.out.println("1." + mounth1 + " місяці. Ціна - " + mounth1 * 50);
+                    System.out.println("2." + mounth2 + " місяці. Ціна - " + mounth2 * 50);
+                    System.out.println("3." + mounth3 + " місяці. Ціна - " + mounth3 * 50);
+                    resp = Integer.parseInt(scanner.nextLine());
+                    if (resp == 1) {
+                        animals[animals[0].getPopulation()] = new Goat(mounth1, mounth1 * 50, "Коза");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth1*50;
+                        animals[0].population++;
+                        System.out.println("ви купили козу якій " + mounth1 + " місяці " + "ціна - " + (mounth1 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 2) {
+                        animals[animals[0].getPopulation()] = new Goat(mounth2, mounth2 * 50, "Коза");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth2*50;
+                        animals[0].population++;
+                        System.out.println("ви купили козу якій " + mounth2 + " місяці " + "ціна - " + (mounth2 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 3) {
+                        animals[animals[0].getPopulation()] = new Goat(mounth3, mounth3 * 50, "Коза");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth3*50;
+                        animals[0].population++;
+                        System.out.println("ви купили козу якій " + mounth3 + " місяці " + "ціна - " + (mounth3 * 50) + "грн");
+                        scanner.nextLine();
+                    }
+                } else if (resp == 4){
+                    int mounth1 = (int) (Math.random() * (45));
+                    int mounth2 = (int) (Math.random() * (45));
+                    int mounth3 = (int) (Math.random() * (45));
+                    System.out.println("1." + mounth1 + " місяці. Ціна - " + mounth1 * 50);
+                    System.out.println("2." + mounth2 + " місяці. Ціна - " + mounth2 * 50);
+                    System.out.println("3." + mounth3 + " місяці. Ціна - " + mounth3 * 50);
+                    resp = Integer.parseInt(scanner.nextLine());
+                    if (resp == 1) {
+                        animals[animals[0].getPopulation()] = new Pig(mounth1, mounth1 * 50, "Свиня");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth1*50;
+                        animals[0].population++;
+                        System.out.println("ви купили свиню якій " + mounth1 + " місяці " + "ціна - " + (mounth1 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 2) {
+                        animals[animals[0].getPopulation()] = new Pig(mounth2, mounth2 * 50, "Свиня");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth2*50;
+                        animals[0].population++;
+                        System.out.println("ви купили свиню якій " + mounth2 + " місяці " + "ціна - " + (mounth2 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 3) {
+                        animals[animals[0].getPopulation()] = new Pig(mounth3, mounth3 * 50, "Свиня");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth3*50;
+                        animals[0].population++;
+                        System.out.println("ви купили свиню якій " + mounth3 + " місяці " + "ціна - " + (mounth3 * 50) + "грн");
+                        scanner.nextLine();
+                    }
+                } else if (resp == 5){
+                    int mounth1 = (int) (Math.random() * (50));
+                    int mounth2 = (int) (Math.random() * (50));
+                    int mounth3 = (int) (Math.random() * (50));
+                    System.out.println("1." + mounth1 + " місяці. Ціна - " + mounth1 * 50);
+                    System.out.println("2." + mounth2 + " місяці. Ціна - " + mounth2 * 50);
+                    System.out.println("3." + mounth3 + " місяці. Ціна - " + mounth3 * 50);
+                    resp = Integer.parseInt(scanner.nextLine());
+                    if (resp == 1) {
+                        animals[animals[0].getPopulation()] = new Sheep(mounth1, mounth1 * 50, "Вівця");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth1*50;
+                        animals[0].population++;
+                        System.out.println("ви купили вівцю якій " + mounth1 + " місяці " + "ціна - " + (mounth1 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 2) {
+                        animals[animals[0].getPopulation()] = new Sheep(mounth2, mounth2 * 50, "Вівця");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth2*50;
+                        animals[0].population++;
+                        System.out.println("ви купили вівцю якій " + mounth2 + " місяці " + "ціна - " + (mounth2 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 3) {
+                        animals[animals[0].getPopulation()] = new Sheep(mounth3, mounth3 * 50, "Вівця");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth3*50;
+                        animals[0].population++;
+                        System.out.println("ви купили вівцю якій " + mounth3 + " місяці " + "ціна - " + (mounth3 * 50) + "грн");
+                        scanner.nextLine();
+                    }
+                } else if (resp == 6){
+                    int mounth1 = (int) (Math.random() * (13));
+                    int mounth2 = (int) (Math.random() * (13));
+                    int mounth3 = (int) (Math.random() * (13));
+                    System.out.println("1." + mounth1 + " місяці. Ціна - " + mounth1 * 50);
+                    System.out.println("2." + mounth2 + " місяці. Ціна - " + mounth2 * 50);
+                    System.out.println("3." + mounth3 + " місяці. Ціна - " + mounth3 * 50);
+                    resp = Integer.parseInt(scanner.nextLine());
+                    if (resp == 1) {
+                        animals[animals[0].getPopulation()] = new Hare(mounth1, mounth1 * 50, "Заєць");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth1*50;
+                        animals[0].population++;
+                        System.out.println("ви купили зайця якій " + mounth1 + " місяці " + "ціна - " + (mounth1 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 2) {
+                        animals[animals[0].getPopulation()] = new Hare(mounth2, mounth2 * 50, "Заєць");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth2*50;
+                        animals[0].population++;
+                        System.out.println("ви купили зайця якій " + mounth2 + " місяці " + "ціна - " + (mounth2 * 50) + "грн");
+                        scanner.nextLine();
+                    } else if (resp == 3) {
+                        animals[animals[0].getPopulation()] = new Hare(mounth3, mounth3 * 50, "Заєць");
+                        animals[animals[0].getPopulation()].setAsLive(true);
+                        money = money - mounth3*50;
+                        animals[0].population++;
+                        System.out.println("ви купили зайця якій " + mounth3 + " місяці " + "ціна - " + (mounth3 * 50) + "грн");
+                        scanner.nextLine();
+                    }
+                } else if (resp == 7){
+                    {
+                        int mounth1 = (int) (Math.random() * (13));
+                        int mounth2 = (int) (Math.random() * (13));
+                        int mounth3 = (int) (Math.random() * (13));
+                        System.out.println("1." + mounth1 + " місяці. Ціна - " + mounth1 * 50);
+                        System.out.println("2." + mounth2 + " місяці. Ціна - " + mounth2 * 50);
+                        System.out.println("3." + mounth3 + " місяці. Ціна - " + mounth3 * 50);
+                        resp = Integer.parseInt(scanner.nextLine());
+                        if (resp == 1) {
+                            animals[animals[0].getPopulation()] = new Chicken(mounth1, mounth1 * 50, "Курка");
+                            animals[animals[0].getPopulation()].setAsLive(true);
+                            money = money - mounth1*50;
+                            animals[0].population++;
+                            System.out.println("ви купили курку якій " + mounth1 + " місяці " + "ціна - " + (mounth1 * 50) + "грн");
+                            scanner.nextLine();
+                        } else if (resp == 2) {
+                            animals[animals[0].getPopulation()] = new Chicken(mounth2, mounth2 * 50, "Курка");
+                            animals[animals[0].getPopulation()].setAsLive(true);
+                            money = money - mounth2*50;
+                            animals[0].population++;
+                            System.out.println("ви купили курку якій " + mounth2 + " місяці " + "ціна - " + (mounth2 * 50) + "грн");
+                            scanner.nextLine();
+                        } else if (resp == 3) {
+                            animals[animals[0].getPopulation()] = new Chicken(mounth3, mounth3 * 50, "Курка");
+                            animals[animals[0].getPopulation()].setAsLive(true);
+                            money = money - mounth3*50;
+                            animals[0].population++;
+                            System.out.println("ви купили курку якій " + mounth3 + " місяці " + "ціна - " + (mounth3 * 50) + "грн");
+                            scanner.nextLine();
+                        }
+                    }
                 }
-
             } else if (resp == 8) {
-                day = day + 1;
-                System.out.println("Зараз " + day + " день");
+                day++;
+                System.out.println("Зараз " + day + " день і місяць " + mounth);
+                thisday = true;
+                daysee = false;
+                System.out.println("Гроші: " + money + " грн");
+                for (int i = 0; i < animals[0].getPopulation(); i++) {
+                    System.out.println("У вас є такі тварини " + animals[i].getAge());
+                    System.out.println(animals[i].name + " - " + animals[i].isLive());
+                    animals[i].setHungry(true);
+                    if (day%10 == 0){
+                        for (int j = 0; j < animals[0].population ; j++) {
+                            animals[j].setAge(animals[j].getAge()+1);
+                            mounth++;
+                        }
+                    }
+                }
             }
             else if (resp == 9){
                 break;
