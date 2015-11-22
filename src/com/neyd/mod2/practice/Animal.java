@@ -17,6 +17,7 @@ abstract public class Animal {
         this.priceAnimal = priceAnimal;
         this.name = name;
     }
+
     public int getPopulation() {
         return population;
     }
@@ -24,6 +25,7 @@ abstract public class Animal {
     public void setPopulation(int population) {
         this.population = population;
     }
+
     public int getFood() {
         return resource;
     }

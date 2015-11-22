@@ -7,8 +7,10 @@ public class Pig extends Animal {
     public Pig(int age, int priceAnimal, String name) {
         super(age, priceAnimal, name);
     }
+
     public static final int FEEDING_COST_PER_MOUNTH_OF_AGE = 3;
     public static final int PROVIDES_RESOURCES_WHEN_THROWING_FOOD = 15;
+
     @Override
     public int getPriceFood() {
         if (asLive != false) {
