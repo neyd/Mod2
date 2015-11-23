@@ -1,10 +1,10 @@
-package com.neyd.mod2.practice;
+package com.neyd.mod2.practice1;
 
 /**
  * Created by Женя on 03.11.2015.
  */
 abstract public class Animal {
-    private boolean asHungry;
+    protected boolean asHungry;
     protected boolean asLive;
     protected int age;
     protected int resource;

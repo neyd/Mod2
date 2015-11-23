@@ -1,15 +1,14 @@
-package com.neyd.mod2.practice;
+package com.neyd.mod2.practice1;
 
 /**
- * Created by Женя on 03.11.2015.
+ * Created by Женя on 10.11.2015.
  */
-public class Horse extends Animal {
-    public Horse(int age, int priceAnimal, String name) {
+public class Hare extends Animal {
+    public Hare(int age, int priceAnimal, String name) {
         super(age, priceAnimal, name);
     }
-
     public static final int FEEDING_COST_PER_MOUNTH_OF_AGE = 4;
-
+    public static final int PROVIDES_RESOURCES_WHEN_THROWING_FOOD = 7;
     @Override
     public int getPriceFood() {
         if (asLive != false) {
@@ -17,23 +16,29 @@ public class Horse extends Animal {
         } else return 0;
     }
 
+    public int getFood() {
+        if (asLive != false) {
+            return PROVIDES_RESOURCES_WHEN_THROWING_FOOD * this.age;
+        } else return 0;
+    }
+
     public int getPriceAnimal() {
         if (asLive != false) {
-            if (this.age <= 53) {
+            if (this.age <= 8) {
                 return priceAnimal * 2;
-            } else if (this.age <= 70) {
+            } else if (this.age <= 10) {
                 return priceAnimal;
-            } else if (this.age <= 80) {
+            } else if (this.age <= 12) {
                 return (int) Math.floor(priceAnimal / 2);
-            } else if (this.age <= 95) {
+            } else if (this.age <= 13) {
                 return (int) Math.floor(priceAnimal / 4);
             } else return 0;
         } else return 0;
     }
 
     public boolean isLive() {
-        int randomNumber = (int) (Math.random() * (11)) + 100;
-        if (this.age <= 105) {
+        int randomNumber = (int) (Math.random() * (11)) + 10;
+        if (this.age <= 15) {
             return asLive = true;
         } else return asLive = false;
     }

@@ -1,4 +1,4 @@
-package com.neyd.mod2.practice;
+package com.neyd.mod2.practice1;
 
 /**
  * Created by Женя on 03.11.2015.

@@ -1,4 +1,4 @@
-package com.neyd.mod2.practice;
+package com.neyd.mod2.practice1;
 
 import java.util.Scanner;
 
@@ -28,6 +28,7 @@ public class OOPBasicsPractice {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < animals[0].getPopulation(); i++) {
             animals[i].isLive();
+            animals[i].setHungry(true);
             System.out.println(animals[i].isLive() + " - " + animals[i].name + " - " + animals[i].getAge());
         }
         System.out.println("Зарас проходить " + day + " день");
@@ -37,7 +38,7 @@ public class OOPBasicsPractice {
             System.out.println("1.Погодувати всіх тварин        " + asHungryString);
             System.out.println("2.Подивитися скільки ресурсів");
             System.out.println("3.Продати ресурси");
-            System.out.println("4.Подивитися скільки грошей");
+            System.out.println("4.Які тварини є");
             System.out.println("5.Продати тварину");
             System.out.println("6.Пустити на їжу");
             System.out.println("7.Купити тварин");
@@ -46,29 +47,43 @@ public class OOPBasicsPractice {
             resp = Integer.parseInt(scanner.nextLine());
             if (resp == 1) {
                 for (int i = 0; i < animals[0].getPopulation(); i++) {
-                    if (money >= animals[i].getPriceFood() && animals[i].asLive == true) {
-                        allPrice = allPrice + animals[i].getPriceFood();
-                        animals[i].feed();
-                        System.out.println(animals[i].isHungry() + " - " + animals[i].name + " - " + animals[i].getAge());
-                        System.out.println("Ціна їжі - " + animals[i].getPriceFood());
-                        money = money - animals[i].getPriceFood();
-                        asHungryString = "";
+                    if (money >= animals[i].getPriceFood() && animals[i].asLive == true && animals[i].isHungry() == true) {
+                            allPrice = allPrice + animals[i].getPriceFood();
+                            animals[i].feed();
+                            System.out.println("Ви нагодували тварину" + " - " + animals[i].name + " - " + animals[i].getAge());
+                            System.out.println("Ціна їжі - " + animals[i].getPriceFood());
+                            money = money - animals[i].getPriceFood();
+                            asHungryString = "";
+                        if (i == animals[i].population - 1) {
+                            System.out.println("Тварини тепер ситі");
+                            System.out.println(allPrice + " - загальна сумма");
+                            System.out.println("У вас залишилось " + money + " грн");
+                            allPrice = 0;
+
+                        }
+                    }else if (animals[i].asLive == false) {
+                        System.out.println();
+                    } else if (animals[i].isHungry() == false){
+                        System.out.println("Тварина сита");
                     }
+                    else if (money <= animals[i].getPriceFood()){
+                        System.out.println("У вас недостатньо кошків");
+                    }
+                    scanner.nextLine();
                 }
-                System.out.println("Тварини тепер ситі");
-                System.out.println(allPrice + " - загальна сумма");
-                System.out.println("У вас залишилось " + money + " грн");
-                allPrice = 0;
                 scanner.nextLine();
             } else if (resp == 2) {
-                if (thisday != false) {
+                if (thisday != false && asHungryString.equals("")) {
                     for (int i = 0; i < animals[0].getPopulation(); i++) {
                         System.out.println(animals[i].getResource() + " - " + animals[i].name);
                         allResource = allResource + animals[i].getResource();
                         thisday = false;
                         daysee = true;
                     }
-                } else {
+                }else if (asHungryString.equals("Тварини голодні")){
+                    System.out.println("Погодуйте тварин");
+                }
+                else if (thisday != false){
                     System.out.println("Ви вже дивилися ресурси сьогодні");
                 }
                 System.out.println("У вас зарас " + allResource + " ресурсів");
@@ -87,11 +102,14 @@ public class OOPBasicsPractice {
                     scanner.nextLine();
                 }
             } else if (resp == 4) {
-                System.out.println("У вас зарас " + money + " грн");
+                for (int i = 0; i < animals[0].getPopulation(); i++) {
+                    System.out.println((i + 1) + "." + animals[i].name + " - " + animals[i].asLive + " - " + animals[i].age);
+                }
+                System.out.println("У вас зарас " + animals[0].population + " тварин");
                 scanner.nextLine();
             } else if (resp == 5) {
                 for (int i = 0; i < animals[0].getPopulation(); i++) {
-                    System.out.println((i + 1) + "." + animals[i].name + " - " + animals[i].asLive);
+                    System.out.println((i + 1) + "." + animals[i].name + " - " + animals[i].asLive + " - " + animals[i].age);
                 }
                 resp = Integer.parseInt(scanner.nextLine());
                 for (int i = 0; i < animals[0].getPopulation(); i++) {
@@ -105,6 +123,8 @@ public class OOPBasicsPractice {
                 for (int i = 0; i < animals[0].population; i++) {
                     if (animals[i].getFood() != 0) {
                         System.out.println((i + 1) + "." + animals[i].name + " - " + animals[i].asLive);
+                    } else {
+                        System.out.println((i+1) + "." + animals[i].name + " - " + "false");
                     }
                 }
                 resp = Integer.parseInt(scanner.nextLine());
@@ -337,26 +357,29 @@ public class OOPBasicsPractice {
                     }
                 }
             } else if (resp == 8) {
-                day++;
-                System.out.println("Зараз " + day + " день і місяць " + mounth);
-                thisday = true;
-                daysee = false;
-                System.out.println("Гроші: " + money + " грн");
-                System.out.println("У вас є такі тварини ");
-                asHungryString = "Тварини голодні";
-                for (int i = 0; i < animals[0].getPopulation(); i++) {
-                    if (animals[i].asLive == true) {
-                        System.out.println(animals[i].name + " - " + " - " + animals[i].getAge());
-                        animals[i].setHungry(true);
+                if (asHungryString.equals("")) {
+                    day++;
+                    System.out.println("Зараз " + day + " день і місяць " + mounth);
+                    thisday = true;
+                    daysee = false;
+                    System.out.println("Гроші: " + money + " грн");
+                    System.out.println("У вас є такі тварини ");
+                    asHungryString = "Тварини голодні";
+                    for (int i = 0; i < animals[0].getPopulation(); i++) {
+                        if (animals[i].asLive == true) {
+                            System.out.println(animals[i].name + " - " + " - " + animals[i].getAge());
+                            animals[i].setHungry(true);
+                        }
                     }
-                }
-                if (day % 5 == 0) {
-                    for (int j = 0; j < animals[0].population; j++) {
-                        animals[j].setAge(animals[j].getAge() + 1);
+                    if (day % 5 == 0) {
+                        for (int j = 0; j < animals[0].population; j++) {
+                            animals[j].setAge(animals[j].getAge() + 1);
+                        }
+                        mounth++;
+                        day = 0;
                     }
-                    mounth++;
-                    day = 0;
-                }
+                    scanner.nextLine();
+                } else System.out.println("Погодуйте тварин");
             } else if (resp == 9) {
                 break;
             }
